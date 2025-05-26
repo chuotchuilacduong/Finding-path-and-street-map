@@ -53,12 +53,3 @@ This project implements the **A* Search Algorithm** on real-world maps using dat
    ![image](https://github.com/user-attachments/assets/31651365-445e-4dbe-8257-f9aa87222dba)
 
 ---
-
-## 📌 Authors
-🔹 **[Trinh Phu Thai]** - SOICT, HUST  
-📌 *Course: Introduction to AI*  
-
-🎯 **Project for educational purposes only.**
-
----
-
