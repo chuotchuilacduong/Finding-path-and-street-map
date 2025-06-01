@@ -13,11 +13,21 @@ Dự án này triển khai **Thuật toán Tìm kiếm A\*** trên bản đồ t
 
 ## 📂 Tính Năng
 
-✅ **Xây dựng Đồ thị từ Dữ liệu OSM**: Trích xuất mạng lưới đường thực tế.
-✅ **Triển khai Thuật toán A\***: Tự cài đặt thuật toán A\* mà không sử dụng các hàm tìm đường đi ngắn nhất có sẵn.
-✅ **Trực quan hóa**: Hiển thị đồ thị và đường đi ngắn nhất được tính toán.
-✅ **Giao diện Web tương tác**: Cho phép người dùng chọn điểm đầu, cuối và thuật toán trên bản đồ trực quan (thông qua file `Deploy.py` sử dụng Flask và Leaflet).
-✅ **So sánh Thuật toán**: Cung cấp khả năng so sánh A\* với các thuật toán tìm đường khác như UCS (Dijkstra), Greedy BFS và DFS.
+✅ **Xây dựng Đồ thị từ Dữ liệu OSM**: 
+   - Trích xuất mạng lưới đường thực tế.
+
+✅ **Triển khai Thuật toán A\***: 
+   - Tự cài đặt thuật toán A\* mà không sử dụng các hàm tìm đường đi ngắn nhất có sẵn.
+
+✅ **Trực quan hóa**: 
+   - Hiển thị đồ thị và đường đi ngắn nhất được tính toán.
+
+✅ **Giao diện Web tương tác**: 
+   - Cho phép người dùng chọn điểm đầu, cuối và thuật toán trên bản đồ trực quan.
+   - (Thông qua file `Deploy.py` sử dụng Flask và Leaflet).
+
+✅ **So sánh Thuật toán**: 
+   - Cung cấp khả năng so sánh A\* với các thuật toán tìm đường khác như UCS (Dijkstra), Greedy BFS và DFS.
 
 ---
 
