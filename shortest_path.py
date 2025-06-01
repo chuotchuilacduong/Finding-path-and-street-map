@@ -269,3 +269,64 @@ def Dijkstra(graph_simple, start, goal, current_maps_data=maps_data):
     if not current_maps_data or start not in graph_simple or goal not in graph_simple:
         return None, 0, 0.0, 0.0
     return UCS(graph_simple, start, goal, current_maps_data)
+def DFS_search(graph_simple, start, goal, current_maps_data=maps_data):
+    """
+    Tìm đường đi từ start đến goal bằng thuật toán DFS.
+    Không đảm bảo đường đi ngắn nhất.
+    Trả về: (path_coordinates, nodes_expanded, execution_time, total_distance_val)
+    """
+    if not current_maps_data or start not in graph_simple or goal not in graph_simple:
+        return None, 0, 0.0, 0.0
+
+    start_time = time.perf_counter()
+    nodes_expanded = 0
+    
+    # Stack lưu trữ các node cần duyệt
+    # Mỗi phần tử trong stack là một tuple (node, parent_node) để dùng cho came_from
+    open_stack = [(start, None)] 
+    
+    came_from = {} 
+    visited_dfs = set() # Theo dõi các node đã được đưa vào stack để tránh chu trình và lặp lại
+
+    path_node_ids_result = None
+
+    while open_stack:
+        current_node, parent_for_current = open_stack.pop() # Lấy từ cuối stack (LIFO)
+        
+        # Nếu node này đã được xử lý từ một đường khác (do có thể có nhiều đường dẫn đến 1 node trong DFS)
+        # và chúng ta chỉ cần tìm 1 đường đi thì có thể bỏ qua.
+        # Tuy nhiên, để came_from được ghi nhận đúng cho đường đi đầu tiên tìm thấy, 
+        # ta sẽ kiểm tra visited_dfs khi thêm vào stack.
+        # Nếu current_node đã có trong came_from nghĩa là nó đã có parent, không ghi đè.
+        if current_node not in came_from and parent_for_current is not None:
+             came_from[current_node] = parent_for_current
+        
+        # Nếu node này chưa được "mở rộng" thì mới xử lý
+        if current_node in visited_dfs and current_node != start : # Cho phép xử lý start node lần đầu
+            continue
+        visited_dfs.add(current_node)
+        nodes_expanded += 1
+
+
+        if current_node == goal:
+            execution_time = time.perf_counter() - start_time
+            path_node_ids_result = reconstruct_path_nodes(came_from, current_node)
+            path_coordinates = Create_path_coord(path_node_ids_result, current_maps_data)
+            total_distance_val = calculate_actual_path_length(path_node_ids_result, graph_simple)
+            return path_coordinates, nodes_expanded, execution_time, total_distance_val
+
+        # Thêm các neighbors chưa được thăm vào stack
+        # Đảo ngược thứ tự duyệt neighbors để stack.pop() hoạt động giống đệ quy (duyệt "sâu" theo thứ tự thông thường)
+        for neighbor_data in reversed(graph_simple.get(current_node, [])):
+            neighbor_node = neighbor_data[0]
+            # Chỉ thêm vào stack nếu neighbor chưa được thăm (chưa được đưa vào stack trước đó)
+            if neighbor_node not in visited_dfs: 
+                # visited_dfs.add(neighbor_node) # Đánh dấu visited khi đưa vào stack để tránh thêm nhiều lần
+                                              # Hoặc đánh dấu khi pop ra như hiện tại, tùy cách quản lý
+                if neighbor_node not in came_from: # Chỉ ghi nhận parent đầu tiên
+                    came_from[neighbor_node] = current_node
+                open_stack.append((neighbor_node, current_node)) # Thêm cả parent để cập nhật came_from
+
+    # Không tìm thấy đường đi
+    execution_time = time.perf_counter() - start_time
+    return None, nodes_expanded, execution_time, 0.0

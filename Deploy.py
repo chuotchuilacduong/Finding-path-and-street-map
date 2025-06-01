@@ -6,7 +6,7 @@ import osmnx as ox
 from shortest_path import (
     Create_simple_Graph,
     A_star,
-    UCS,
+    DFS_search,
     Greedy_best_first_search,
     Dijkstra
     # Đảm bảo rằng shortest_path.py cũng có các hàm phụ trợ như
@@ -60,8 +60,8 @@ def index_route(): # Đổi tên hàm để tránh trùng với module index (n�
 algorithm_list = {
     'Dijkstra': Dijkstra,
     'A Star': A_star,
-    'UCS': UCS,
-    'Greedy BFS': Greedy_best_first_search,
+    'DFS': DFS_search,
+    'BFS': Greedy_best_first_search,
 }
 
 @app.route('/find_shortest_path', methods=['POST'])
