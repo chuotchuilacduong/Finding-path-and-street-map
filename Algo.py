@@ -4,10 +4,11 @@ import osmnx as ox
 from math import radians, cos, sqrt
 import time
 
+
 try:
-    maps_data = ox.load_graphml('HaiBaTrung.graphml')
+    maps_data = ox.load_graphml('noithanh_HaNoi.graphml')
 except FileNotFoundError:
-    print("Lỗi: Không tìm thấy file HaiBaTrung.graphml. Hãy đảm bảo file tồn tại.")
+    print("Lỗi: Không tìm thấy file noithanh_HaNoi.graphml. Hãy đảm bảo file tồn tại.")
     maps_data = None
 except Exception as e:
     print(f"Lỗi khi tải maps_data: {e}")

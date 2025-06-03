@@ -3,7 +3,7 @@ import osmnx as ox
 # import time # shortest_path.py đã xử lý thời gian
 
 # Import các hàm cần thiết từ shortest_path.py
-from shortest_path import (
+from Algo import (
     Create_simple_Graph,
     A_star,
     DFS_search,
@@ -18,10 +18,10 @@ app = Flask(__name__)
 
 # Tải bản đồ và tạo đồ thị đơn giản một lần khi ứng dụng khởi động
 try:
-    hanoi_inner_city_polygon_combined_map = ox.load_graphml('hanoi_inner_city_polygon_combined.graphml')
+    hanoi_inner_city_polygon_combined_map = ox.load_graphml('noithanh_HaNoi.graphml')
     G_simple = Create_simple_Graph(hanoi_inner_city_polygon_combined_map) # Hàm này cần đối tượng bản đồ từ osmnx
 except FileNotFoundError:
-    print("LỖI NGHIÊM TRỌNG: Không tìm thấy file hanoi_inner_city_polygon_combined.graphml. Ứng dụng không thể khởi động.")
+    print("LỖI NGHIÊM TRỌNG: Không tìm thấy file noithanh_HaNoi.graphml. Ứng dụng không thể khởi động.")
     hanoi_inner_city_polygon_combined_map = None
     G_simple = {}
 except Exception as e:
